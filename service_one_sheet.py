@@ -55,8 +55,14 @@ def format_date(date_string):
     return int(_date[0]), int(_date[1]), int(_date[2])
 
 
-def send_email(email):
-    # email_text = "ok stvari se desavaju, normalan non robot text, ok, bye."
+def send_email(email, settings):
+    # Email initialization
+    email_message = MIMEMultipart()
+    email_message['From'] = settings['Sender email']
+    email_message['To'] = email
+
+    # Email content
+    email_message['Subject'] = "Test sending emails"
     html = f'''
         <!DOCTYPE html>
         <html>
@@ -79,26 +85,21 @@ def send_email(email):
         </html>
         '''
 
-    # Set up the email addresses and password. Please replace below with your email address and password
-
-    # TODO: settings
-    password = 'mojfxgachxjuuksm'
-    email_message = MIMEMultipart()
-    email_message['From'] = 'matijasreckovic97@gmail.com'
-    email_message['To'] = email
-    email_message['Subject'] = "Test sending emails"
-
+    # Finalize and send
     email_message.attach(MIMEText(html, "html"))
     email_string = email_message.as_string()
+    password = settings['Sender email app password']
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
         server.login(email_message['From'], password)
         server.sendmail(email_message['From'], email, email_string)
-    print("email sent")
+    print("email to " + email_message['To'] + "sent")
 
     # treba mi 5$ da implementiram unsibscribe link
     # - odvede ih na stranicu, you have been unsubbed
     # - link: https://example.com/unsubscribe?email=john@example.com get email from query
+    # ko je unsubbed dodas u jedan excel sheet jelte i provers kad saljes da li osoba nije na listi,
+    # apsolutno neefikasno ali sta da se radi
 
 
 def send_sms(phone):
@@ -154,7 +155,7 @@ def process_sheet(ws, settings):
         if curr_date.day == day and curr_date.month == month - settings['Birthday notification advance']:
 
             if email is not None and EMAIL_REGEX.fullmatch(email):
-                send_email(email)
+                send_email(email, settings)
 
             if phone is not None:
                 phone = convert_phone_num_to_valid_format(phone)

@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 from common import get_file_path_in_curr_working_dir
-from configurtion import load_settings, get_required_columns_names
+from configurtion import load_settings
 from google_drive_library.discovery import list_files_shared_with_service_acc, filter_files_by_mimeType
 from google_drive_library.get import download_file_with_service_acc
 from service_one_sheet import process_sheet
@@ -22,10 +22,10 @@ service = build('drive', 'v3', credentials=creds)
 files = list_files_shared_with_service_acc(service)
 xlsx_mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 xlsx_files = filter_files_by_mimeType(files, xlsx_mimeType)
+print('Excel files shared with service accoutn: ', xlsx_files)
 
 # Read settings file
 settings = load_settings(service, xlsx_files)
-required_fields = get_required_columns_names(settings)
 
 # Process files
 for f in xlsx_files:

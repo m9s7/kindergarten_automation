@@ -41,17 +41,8 @@ def load_settings(service, files):
         "Phone number column name": ws["e6"].value,
         "Birthday date column name": ws["e7"].value,
         "Birthday notification advance": int(ws["e8"].value),
+        "Sender email": ws["e9"].value,
+        "Sender email app password": ws["e10"].value,
     }
 
     return settings
-
-
-def get_required_columns_names(settings):
-
-    required_fields = [
-        settings['Email column name'],
-        settings['Phone number column name'],
-        settings['Birthday date column name'],
-    ]
-
-    return required_fields
