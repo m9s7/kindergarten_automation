@@ -1,5 +1,3 @@
-# List files in the Google dive
-
 def list_files_shared_with_service_acc(service):
     fileList = []
 

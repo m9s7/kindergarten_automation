@@ -1,15 +1,3 @@
-import datetime
-
-from twilio.rest import Client
-
-SID = 'AC9242730e7817ba318ccf149906f42668'
-AUTH_TOKEN = '85b69c06a249e72186ca0b4c8aa8beb7'
-
-cl = Client(SID, AUTH_TOKEN)
-
-body = "It's yo kid bday"
-
-
 def convert_phone_num_to_valid_format(phone_num):
     phone_num = [c for c in phone_num if str.isdigit(c)]
 
@@ -19,17 +7,28 @@ def convert_phone_num_to_valid_format(phone_num):
     return "".join(phone_num)
 
 
-def format_date(date_string):
-    if isinstance(date_string, datetime.datetime):
-        return int(date_string.day), int(date_string.month), int(date_string.year)
+def send_sms_messages(recipient_list):
+    import requests
 
-    date = date_string.split('.')
-    date = [d.strip() for d in date]
+    url = "https://api.smsagent.rs/v1/sms/bulk"
 
-    while date.count(''):
-        date.remove('')
+    # TODO: remove in production
+    recipient_list = [phone_num for phone_num in recipient_list if phone_num == '+381677019917' or phone_num == '+381652248294']
 
-    if len(date) != 3:
-        return None, None, None
+    payload = {
+        "to": recipient_list,
+        "message": "hello",
+        "from": "SMSAgent",
+        "type": "INFO"
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 0LXkwBwCOX7UgdOdyP5v6kjm7PdDJ4FzzycFDIWvY4jg8VaoKlDvSmxZXaauYL3eP6Q71Qpq10Es94vUMUznXJVIOjI26YhzC3RcG7vBVXCAsPq5Cx6LJW2cu3eJ20ha"
+    }
 
-    return int(date[0]), int(date[1]), int(date[2])
+    response = requests.request("POST", url, json=payload, headers=headers)
+
+    if not (200 <= response.status_code < 300):
+        print("Poruke za sledecu grupu nisu poslate: ")
+        print(recipient_list)
+        print(response.status_code, response.text)
