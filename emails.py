@@ -2,29 +2,27 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-subject = "Test sending emails"
+subject = "Activity Sportski Rođendan"
 html = f'''
         <!DOCTYPE html>
         <html>
           <head>
-            <title>Happy Birthday!</title>
+            <title>Activity Sportski Rođendan</title>
           </head>
           <body style="background-color: #f5f5f5; font-family: Arial, sans-serif; font-size: 16px;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px;">
               <img src="https://box4you.rs/image/cache/catalog/postcards/sa-zirafom-1-1000x1000.jpg" alt="Happy Birthday!" style="display: block; margin: 0 auto; max-width: 100%;">
-              <h1 style="text-align: center; color: #ff8c00; margin: 20px 0;">Happy Birthday!</h1>
-              <p>Dear dete u nominativu,</p>
-              <p>Wishing you a very happy birthday filled with love, joy, and laughter! May all your wishes come true and may this new year of your life be full of wonderful moments and achievements.</p>
-              <p>Thank you for being a part of our community, and we hope this birthday brings you much happiness and many memorable moments. Enjoy your special day!</p>
-              <p>Best wishes,</p>
-              <p>Activity center Team</p>
+              <h1 style="text-align: center; color: #ff8c00; margin: 20px 0;">Proslavite sa nama svoj NAJBOLJI SPORTSKI ROĐENDAN prilagođen uzrastu uz sportske igre, survivor poligone i Pena žurku!</h1>
+              <p>+381642748571 www.activitycentar.com </p>
               <hr style="border: none; border-top: 1px solid #dcdcdc; margin: 20px 0;">
-              <p style="text-align: center; font-size: 14px;">If you would like to unsubscribe from future birthday emails, please click <a href="[unsubscribe link]">here</a>.</p>
             </div>
           </body>
         </html>
         '''
 
+
+# <h1 style="text-align: center; color: #ff8c00; margin: 20px 0;">Happy Birthday!</h1>
+#               <p>Proslavite sa nama svoj NAJBOLJI SPORTSKI ROĐENDAN prilagođen uzrastu uz sportske igre, survivor poligone i Pena žurku!</p>
 
 def send_email(email, settings):
     # Email initialization

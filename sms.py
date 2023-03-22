@@ -13,11 +13,11 @@ def send_sms_messages(recipient_list):
     url = "https://api.smsagent.rs/v1/sms/bulk"
 
     # TODO: remove in production
-    recipient_list = [phone_num for phone_num in recipient_list if phone_num == '+381677019917' or phone_num == '+381652248294']
+    recipient_list = [phone_num for phone_num in recipient_list if phone_num == '+381677019917']
 
     payload = {
         "to": recipient_list,
-        "message": "hello",
+        "message": "Proslavite sa nama svoj NAJBOLJI SPORTSKI ROĐENDAN prilagođen uzrastu uz sportske igre, survivor poligone i Pena žurku! \n +381642748571 www.activitycentar.com",
         "from": "SMSAgent",
         "type": "INFO"
     }

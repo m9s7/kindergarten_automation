@@ -52,6 +52,8 @@ def process_sheet(ws, settings):
         curr_date = date.today()
         if curr_date.day == day and curr_date.month == month - settings[bday_notification_advance]:
 
+            print('ok')
+            print(email)
             if email is not None and EMAIL_REGEX.fullmatch(email):
                 recipient_emails.append(email)
 
